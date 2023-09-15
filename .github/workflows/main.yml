@@ -1,0 +1,21 @@
+name: Sync Fork
+
+on:
+  workflow_dispatch:
+  schedule:
+  - cron: "0 16 * * *"
+
+jobs:
+  merge_fork: 
+    runs-on: ubuntu-latest
+  
+    steps:
+      - uses: actions/checkout@v2
+  
+      - name: Sync and merge Cornell H4I with Fork
+        uses: dabreadman/sync-upstream-repo@v1.0.0.b
+        with:
+          upstream_repo: https://github.com/cornellh4i/okb-hope
+          upstream_branch: main
+          downstream_branch: main
+          token: ${{ secrets.GITHUB_TOKEN }}
